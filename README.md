@@ -15,8 +15,12 @@ To create and edit your work schedule, simply click on the time block to add inf
 
 ## Live Webpage
 
-## Credits
-This project was created by [Your Name] as a personal project.
+https://dspecter21.github.io/Work-Day-Schedule/
 
-License
-This project is licensed under the MIT License.
+## Credits
+
+N/A
+
+## License
+
+Please refer to the license on the repo

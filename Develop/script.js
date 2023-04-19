@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  console.log("document ready");
   //This ensures that the code inside the function is only executed after the DOM has finished loading. This way, you can be sure that all the HTML elements are available for manipulation.
 
   var today = dayjs();
@@ -25,7 +26,8 @@ $(document).ready(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 
-  const calendar = $('#calendar-list')
+  const calendar = $('#calendar-list');
+
   for (let hours = 9; hours < 17 + 1; hours++) {
     let timeBlock = document.createElement('div');
     timeBlock.setAttribute('id', 'hour-' + hours);
@@ -36,7 +38,7 @@ $(document).ready(function () {
 
     let hour = hours % 12;
     hour = (hour == 0 ? 12 : hour)
-    
+
     if (hour < time) {
       timeBlock.classList.add('past');
     } else if (hour > time) {
@@ -48,13 +50,25 @@ $(document).ready(function () {
     hourBlock.textContent = hour + (hours > 11 ? 'PM' : 'AM');
 
 
-    let textArea = document.createElement('div');
+    let textArea = document.createElement('textarea');
     textArea.classList.add('col-8', 'col-md-10', 'description');
     textArea.setAttribute('rows', '3');
+
+    let textAreaData = localStorage.getItem(hour);
+
+    if (textAreaData) {
+      textArea.textContent = textAreaData;
+    }
 
     let saveButton = document.createElement('div');
     saveButton.classList.add('btn', 'saveBtn', 'col-2', 'col-md-1');
     saveButton.setAttribute('aria-label', 'save');
+
+    // Save button event listener
+    saveButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      localStorage.setItem(hour, textArea.value);
+    });
 
     let saveIcon = document.createElement('div');
     saveIcon.classList.add('fas', 'fa-save');
@@ -67,7 +81,8 @@ $(document).ready(function () {
 
     calendar.append(timeBlock);
 
-    // console.log(timeBlock);
+   
   }
+
 
 });
